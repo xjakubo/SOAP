@@ -53,11 +53,18 @@ class Window(Frame, Soap):
         self.drugisemestr.config(state = "disabled")
 
     def licz(self):
-        self.clear()
-        self.sprawdziany(self.tablica(self.sprawdzian.get()))
-        self.odpowiedzi(self.tablica(self.odpowiedz.get()))
-        self.aktywnosci(self.tablica(self.aktywnosc.get()))
-        self.projekty(self.tablica(self.projekt.get()))
+        try:
+            self.clear()
+            self.sprawdziany(self.tablica(self.sprawdzian.get()))
+            self.odpowiedzi(self.tablica(self.odpowiedz.get()))
+            self.aktywnosci(self.tablica(self.aktywnosc.get()))
+            self.projekty(self.tablica(self.projekt.get()))
+        except AttributeError:
+            self.v.set("Wybierz semestr!")
+            return 0
+        except ValueError:
+            self.v.set("Blad!")
+            return 0
         if self.semestr == 2:
             self.testkoncowy(self.tablica(self.koncowy.get()))
         self.v.set(self.podsumowanie())
