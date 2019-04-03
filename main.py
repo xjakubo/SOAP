@@ -14,6 +14,9 @@ class Window(Frame, Soap):
 
         self.master.title("SOAP")
         self.grid()
+        self.v = StringVar(self, value = "Licz")
+        self.nr = StringVar(self, value = "Nr Ucznia")
+        self.klasa = StringVar(self, value = "Klasa")
 
 
     def wyborsemestru(self):
@@ -35,10 +38,12 @@ class Window(Frame, Soap):
         Label(self, text = "Projekt").grid(row = 4, column = 1)
         self.projekt = Entry(self, bd = 5)
         self.projekt.grid(row = 4, column = 2)
-        self.v = StringVar()
-        self.v.set("Licz")
-        licz = Button(self, textvariable = self.v, width = 20, command = self.licz).grid(row = 6, column = 2)
-
+        Button(self, textvariable = self.v, width = 20, command = self.licz).grid(row = 6, column = 1, columnspan = 2, sticky = W+E)
+        self.nrklasy = Entry(self, textvariable = self.klasa, width = 19)
+        self.nrklasy.grid(row = 7, column = 1)
+        self.nrucznia = Entry(self, textvariable = self.nr, width = 19)
+        self.nrucznia.grid(row = 7, column = 2)
+        Button(self, text = "Zapisz Wynik", width = 20, command = self.zapisz).grid(row = 8, column = 1, columnspan = 2, sticky = W+E)
     def pierwszysemestr(self):
         Soap.__init__(self, 1)
         self.pierwszysemestr.config(state = "disabled")
@@ -51,6 +56,10 @@ class Window(Frame, Soap):
         self.koncowy.grid(row = 5, column = 2)
         self.pierwszysemestr.config(state="disabled")
         self.drugisemestr.config(state = "disabled")
+
+    def zapisz(self):
+        self.save(self.nrklasy.get(), self.nrucznia.get(), self.licz())
+        pass
 
     def licz(self):
         try:
@@ -68,6 +77,7 @@ class Window(Frame, Soap):
         if self.semestr == 2:
             self.testkoncowy(self.tablica(self.koncowy.get()))
         self.v.set(self.podsumowanie())
+        return self.podsumowanie()
 root = Tk()
 app = Window(root)
 root.mainloop()
