@@ -6,9 +6,9 @@ class Soap:
         self.oceny = []
 
     def save(self, nazwapliku, numer, srednia):
-        with open("%s.txt" %nazwapliku, "a") as txt:
+
+        with open("%s.txt" %nazwapliku, "a+") as txt:
             txt.write("Numer: %s, Srednia: %s \n" %(numer, srednia))
-        pass
 
     def clear(self):
         self.oceny.clear()

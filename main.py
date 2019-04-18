@@ -8,7 +8,6 @@ class Window(Frame, Soap):
         self.master = master
         self.init_window()
         self.wyborsemestru()
-        self.gui()
 
     def init_window(self):
 
@@ -45,11 +44,13 @@ class Window(Frame, Soap):
         self.nrucznia.grid(row = 7, column = 2)
         Button(self, text = "Zapisz Wynik", width = 20, command = self.zapisz).grid(row = 8, column = 1, columnspan = 2, sticky = W+E)
     def pierwszysemestr(self):
+        self.gui()
         Soap.__init__(self, 1)
         self.pierwszysemestr.config(state = "disabled")
         self.drugisemestr.config(state = "disabled")
 
     def drugisemestr(self):
+        self.gui()
         Soap.__init__(self,2)
         Label(self, text = "Test koncowy").grid(row = 5, column = 1)
         self.koncowy = Entry(self, bd = 5)
@@ -68,9 +69,6 @@ class Window(Frame, Soap):
             self.odpowiedzi(self.tablica(self.odpowiedz.get()))
             self.aktywnosci(self.tablica(self.aktywnosc.get()))
             self.projekty(self.tablica(self.projekt.get()))
-        except AttributeError:
-            self.v.set("Wybierz semestr!")
-            return 0
         except ValueError:
             self.v.set("Blad!")
             return 0
