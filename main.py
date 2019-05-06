@@ -6,10 +6,10 @@ class Window(Frame, Soap):
     def __init__(self, master= None):
         Frame.__init__(self, master)
         self.master = master
-        self.init_window()
-        self.wyborsemestru()
+        self.initWindow()
+        self.wyborSemestru()
 
-    def init_window(self):
+    def initWindow(self):
 
         self.master.title("SOAP")
         self.grid()
@@ -18,7 +18,7 @@ class Window(Frame, Soap):
         self.klasa = StringVar(self, value = "Klasa")
 
 
-    def wyborsemestru(self):
+    def wyborSemestru(self):
         self.pierwszysemestr = Checkbutton(self, text="Pierwszy semestr", command = self.pierwszysemestr)
         self.pierwszysemestr.grid(row = 0, column = 1)
         self.drugisemestr = Checkbutton(self, text = "Drugi semestr", command = self.drugisemestr)
