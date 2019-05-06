@@ -1,33 +1,12 @@
-import time, os, csv
 
-class File:
+from filehandler import *
 
-    def __init__(self,semestr):
-        self.ktorysemestr = semestr
-        self.year = time.strftime("%Y")
-        pass
-
-    def makeDirectory(self):
-        try:
-            os.mkdir('Semestr_%s_%s' %(self.ktorysemestr, self.year))
-        except FileExistsError:
-            return None
-
-    def csvHandling(self):
-        pass
-
-    def save(self, nazwapliku, numer, srednia):
-        self.makeDirectory()
-        with open("Semestr_%s_%s/%s.txt" %(self.ktorysemestr, self.year, nazwapliku), "a+") as txt:
-            txt.write("Numer: %s, Srednia: %s \n" %(numer, srednia))
-
-
-class Soap(File):
+class Soap(FileHandler):
 
     def __init__(self, semestr):
         self.semestr = semestr
         self.oceny = []
-        File.__init__(self, self.semestr)
+        FileHandler.__init__(self, self.semestr)
 
 
 

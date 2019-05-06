@@ -16,6 +16,7 @@ class Window(Frame, Soap):
         self.v = StringVar(self, value = "Licz")
         self.nr = StringVar(self, value = "Nr Ucznia")
         self.klasa = StringVar(self, value = "Klasa")
+        self.zapiszwynik = StringVar(self, value = "Zapisz Wynik")
 
 
     def wyborSemestru(self):
@@ -42,7 +43,7 @@ class Window(Frame, Soap):
         self.nrklasy.grid(row = 7, column = 1)
         self.nrucznia = Entry(self, textvariable = self.nr, width = 19)
         self.nrucznia.grid(row = 7, column = 2)
-        Button(self, text = "Zapisz Wynik", width = 20, command = self.zapisz).grid(row = 8, column = 1, columnspan = 2, sticky = W+E)
+        Button(self, textvariable = self.zapiszwynik, width = 20, command = self.zapisz).grid(row = 8, column = 1, columnspan = 2, sticky = W+E)
     def pierwszysemestr(self):
         self.gui()
         Soap.__init__(self, 1)
@@ -59,7 +60,11 @@ class Window(Frame, Soap):
         self.drugisemestr.config(state = "disabled")
 
     def zapisz(self):
-        self.save(self.nrklasy.get(), self.nrucznia.get(), self.licz())
+        try:
+            self.save(self.nrklasy.get(), int(self.nrucznia.get()), self.licz())
+            self.zapiszwynik.set("Zapisz Wynik")
+        except ValueError:
+            self.zapiszwynik.set("Zly numer ucznia!")
         pass
 
     def licz(self):
