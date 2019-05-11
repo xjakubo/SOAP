@@ -14,7 +14,7 @@ class FileHandler:
             return None
 
     def csvCreate(self):
-        csv.register_dialect('myDialect', delimiter = ';')
+        csv.register_dialect('myDialect', delimiter = ',')
         check = os.path.isfile("Semestr_%s_%s/%s.csv" %(self.ktorysemestr, self.year, self.filename))
         if check == False:
             kolumny = ["NR Ucznia", "Srednia"]
